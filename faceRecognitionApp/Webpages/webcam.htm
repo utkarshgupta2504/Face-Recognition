@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta content="Recognize Face" name="title">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Recognize Face</title>
+	<style>
+		/* body {
+			margin: 0px 0px;
+			padding: 0px 0px;
+		} */
+	</style>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<!-- <body> -->
+
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http) {
+
+			$scope.uploadimage = function()
+
+			{
+				// debugger;
+				// alert ('helllo');
+				var img = document.querySelector('#ss')
+				// || document.createElement('img');
+				var context;
+				var width = video.offsetWidth,
+					height = video.offsetHeight;
+
+				canvas = canvas || document.createElement('canvas');
+				canvas.width = width;
+				canvas.height = height;
+
+				context = canvas.getContext('2d');
+				context.drawImage(video, 0, 0, width, height);
+
+				var image = canvas.toDataURL('image/png');
+
+				img.src = image;
+
+				image = image.replace('data:image/png;base64,', '');
+
+				var imageToSend = image;
+
+				// document.body.appendChild(img);
+				imageToSend = imageToSend.replace(/\//g, '~');
+
+				console.log(imageToSend);
+
+				var string3 = "http://localhost:8000/faceRecognitionApp/recog/";
+
+				console.log(string3);
+
+
+
+				$http({
+					method: "POST",
+					url: string3,
+					data: imageToSend,
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+				}).then(function(response) {
+
+					// debugger;
+					// alert('sss');
+					var resp = response.data;
+					if (resp != null && resp.length > 0) {
+						alert(resp)
+					}
+				}).catch(function(error) {
+
+					// debugger;
+					console.log(error);
+					alert(error.data.Message);
+				});
+
+
+
+			}
+		});
+	</script>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+	<!-- <form> -->
+	<div class="container">
+		<br><br>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<center>
+				<button type="button" name="button" class="button btn btn-primary" style="width: 30%;" onclick="window.open('addNew.htm', target = '_blank');">Register New Face</button>
+				<br> <br>
+				<div class="row">
+					<div class="col-lg-4" style="text-align: right;">
+						<button id="start" class="button btn btn-dark" onclick="startStream()">Start Webcam</button>
+					</div>
+					<div class="col-lg-4">
+						<button id="stop" class="button btn btn-dark" onclick="stopStream()">Stop Webcam</button>
+					</div>
+					<div class="col-lg-4" style="text-align: left;">
+						<button id="Snapshot" class="button btn btn-dark" ng-click="uploadimage()">Snapshot</button>
+					</div>
+				</div>
+				<br> <br>
+				<!-- <input type="submit" name="ssss" />  -->
+				<div>
+					<video autoplay="true" id="videoElement">
+					</video>
+					<canvas id="c" style="display: none;" width="300" height="300"></canvas>
+					<br><br>
+				</div>
+				<br>
+				<div>
+			</center>
+			<div class="snap">
+				<center>
+					<img id="ss" class="img-fluid rounded">
+				</center>
+			</div>
+			<br>
+		</div>
+	</div>
+	</div>
+
+	<script src = "js/myscript.js"></script>
+	<!-- </form> -->
+
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js" charset="utf-8"></script>
+</body>
+
+</html>
