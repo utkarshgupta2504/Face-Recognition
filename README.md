@@ -10,8 +10,8 @@ The process is to start webcam, position yourself and take a snapshot. It wil de
 
 ## Getting Started:
 
-[ ] Clone the repository on your local system
-[ ] Traverse to the root directory
-[ ] Run `pip install -r requiredLibs.txt` to install the dependencies.
-[ ] Run `python manage.py runserver` to start the server at port 8000
-[ ] Open the webpages, and start using the app :) 
+- Clone the repository on your local system
+- Traverse to the root directory
+- Run `pip install -r requiredLibs.txt` to install the dependencies.
+- Run `python manage.py runserver` to start the server at port 8000
+- Open the webpages, and start using the app :) 
