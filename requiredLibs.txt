@@ -1,0 +1,4 @@
+django-cors-headers
+opencv-python
+cmake
+facerecognition
